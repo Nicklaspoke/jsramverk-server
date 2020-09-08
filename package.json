@@ -1,0 +1,28 @@
+{
+  "name": "jsramverk-server",
+  "version": "1.0.0",
+  "description": "REST-API server for the jsramverk-client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nicklaspoke/jsramverk-server.git"
+  },
+  "author": "Nicklaspoke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nicklaspoke/jsramverk-server/issues"
+  },
+  "homepage": "https://github.com/Nicklaspoke/jsramverk-server#readme",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
