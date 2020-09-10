@@ -2,3 +2,4 @@
 
 src/config/config.json
 .env
+db.sqlite

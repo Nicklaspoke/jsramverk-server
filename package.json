@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/index.js",
-        "start-dev": "nodemon src/index.js"
+        "start-dev": "nodemon src/index.js",
+        "db:migrate": "knex migrate:latest"
     },
     "repository": {
         "type": "git",
@@ -19,6 +20,7 @@
     },
     "homepage": "https://github.com/Nicklaspoke/jsramverk-server#readme",
     "dependencies": {
+        "bcryptjs": "^2.4.3",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
