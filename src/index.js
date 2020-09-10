@@ -19,7 +19,7 @@ const port = process.env.PORT || 8080;
 //Mounting Routes
 server.use('/auth', login);
 server.use('/auth', register);
-server.use('/reports', reports);
+server.use('/', reports);
 server.use('/validate', validate);
 
 server.get('/', auth, (req, res) => {
