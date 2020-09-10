@@ -17,8 +17,14 @@ To install and run the server localy install all dependencies with the command `
 If no `.env` file is provided the server will default to run on port 8080, the database will be sqlite3 and your JWT secret will become 'devmode'
 
 After installing and optinally setting up a `.env` file, you will need to run a database migration to create the nessesary tables. To do this run the command `npm run db:migrate`
+after the migration has been ran. You will need to seed it for a default admin account (ONLY USE THIS IN DEVELOPMENT).
 
 To start the server you can either use `npm start` or `npm run start-dev`, dev will use nodemon to to watch and auto reload the server for you.
+
+You can utilize the default admin account to develop and the the API.
+
+-   `emial: admin@admin.se`
+-   `password: admin`
 
 ## Use docker
 
@@ -28,7 +34,10 @@ Easiest way to use the docker container is to utilize docker-compose. Either run
 
 The `.env` file contains envirioment variables for the server to config it correctly
 
+-   `NODE_ENV` defines your node envirioment, can either be production or development
+-   `DEVTOKEN` if you wish to not have to reauthenticate all the time during development, you can set a token here that CAN ONLY be used when `NODE_ENV` is set to development
 -   `PORT` specifies which port the server will be running on
+-   `JWTSECRET` specifies a secret key to be used for signing the JWT tokens (recomended lenght is a 256 bit key)
 -   `DB_TYPE` specifies which type of database to use for the server, currently only sqlite and mysql is supported on the server
 -   `DB_HOST` specifies which host your database is running on
 -   `DB_PORT` specifies which port the database is communicating on
@@ -36,4 +45,3 @@ The `.env` file contains envirioment variables for the server to config it corre
 -   `DB_PASS` specifies the password for above user
 -   `DB_NAME` specifies the name of the database to use
 -   `SQLITE_FILE` specifies the name of the sqlite file (path is relative to the configuration loader, `./src/db`)
--   `JWTSECRET` specifies a secret key to be used for signing the JWT tokens (recomended lenght is a 256 bit key)
