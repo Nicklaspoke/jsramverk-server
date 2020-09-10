@@ -9,7 +9,7 @@ tags:
   - name: content-retrival
 
 paths:
-  /register:
+  /auth/register:
     description: register a new user to the system
     post:
       tags:
@@ -33,7 +33,7 @@ paths:
                     type: object
                     allOf:
                       - $ref: "#/components/schemas/Error"
-  /login:
+  /auth/login:
     description: log a user into the system
     post:
       tags:
