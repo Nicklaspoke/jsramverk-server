@@ -29,7 +29,7 @@ Easiest way to use the docker container is to utilize docker-compose. Either run
 The `.env` file contains envirioment variables for the server to config it correctly
 
 -   `PORT` specifies which port the server will be running on
--   `DB_TYPE` specifies which type of database to use for the server, currently only sqlie and mysql is supported on the server
+-   `DB_TYPE` specifies which type of database to use for the server, currently only sqlite and mysql is supported on the server
 -   `DB_HOST` specifies which host your database is running on
 -   `DB_PORT` specifies which port the database is communicating on
 -   `DB_USER` specifies which user to use for the communcation with the database
