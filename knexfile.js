@@ -1,42 +1,25 @@
-// Update with your config settings.
+const path = require('path');
+require('dotenv').config();
 
-module.exports = {
-    development: {
-        client: 'sqlite3',
-        connection: {
-            filename: './src/db/db.sqlite',
+module.exports = () => {
+    const config = {
+        sqlite3: {
+            client: 'sqlite3',
+            connection: {
+                filename: path.join(__dirname, './src/db', process.env.SQLITE_FILE),
+            },
+            useNullAsDefault: true,
         },
-    },
-
-    staging: {
-        client: 'postgresql',
-        connection: {
-            database: 'my_db',
-            user: 'username',
-            password: 'password',
+        mysql: {
+            client: 'mysql',
+            connection: {
+                host: process.env.DB_HOST,
+                port: process.env.DB_PORT,
+                user: process.env.DB_USER,
+                password: process.env.DB_PASS,
+                database: process.env.DB_NAME,
+            },
         },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            tableName: 'knex_migrations',
-        },
-    },
-
-    production: {
-        client: 'postgresql',
-        connection: {
-            database: 'my_db',
-            user: 'username',
-            password: 'password',
-        },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            tableName: 'knex_migrations',
-        },
-    },
+    };
+    return process.env.DB_TYPE ? config[process.env.DB_TYPE] : config['sqlite3'];
 };
