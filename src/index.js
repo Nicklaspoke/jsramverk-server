@@ -3,11 +3,12 @@
  */
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 
 const server = express();
 server.use(express.json());
 server.use(express.json({ type: 'application/merge-patch+json' }));
-
+server.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 //Routers
 const login = require('./routers/login');
 const register = require('./routers/register');
