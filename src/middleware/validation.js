@@ -4,7 +4,7 @@
 const validator = require('email-validator');
 const genError = require('../helpers/error');
 
-module.exports = validate = (req, res, next) => {
+const validate = (req, res, next) => {
     switch (req.path) {
         case '/register':
             if (!validator.validate(req.body.email) || !req.body.password) {
@@ -17,9 +17,7 @@ module.exports = validate = (req, res, next) => {
             break;
 
         case '/reports':
-            const { week, title, content } = req.body;
-
-            if (!week || !title || !content) {
+            if (!req.body.week || !req.body.title || !req.body.content) {
                 res.status(400).json(
                     genError(
                         400,
@@ -37,3 +35,5 @@ module.exports = validate = (req, res, next) => {
             break;
     }
 };
+
+module.exports = validate;

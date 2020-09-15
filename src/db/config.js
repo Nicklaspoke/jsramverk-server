@@ -3,7 +3,7 @@
  * currently only supports sqlite3 and mysql
  */
 const path = require('path');
-module.exports = getClient = () => {
+const getClient = () => {
     const config = {
         sqlite3: {
             client: 'sqlite3',
@@ -25,3 +25,5 @@ module.exports = getClient = () => {
 
     return process.env.DB_TYPE ? config[process.env.DB_TYPE] : config['sqlite3'];
 };
+
+module.exports = getClient;

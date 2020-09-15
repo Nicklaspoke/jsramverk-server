@@ -10,7 +10,7 @@ const genError = require('../helpers/error');
 const auth = require('../middleware/auth');
 
 router.post('/login', async (req, res) => {
-    credentials = await getCredentials(req.body.email);
+    const credentials = await getCredentials(req.body.email);
     const hash = credentials !== undefined ? credentials.password : '';
 
     if (!(await bcrypt.compare(req.body.password, hash))) {

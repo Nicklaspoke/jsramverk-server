@@ -4,7 +4,7 @@
 const db = require('../db/db');
 const bcrypt = require('bcryptjs');
 
-module.exports = registerAccount = async (accountDetails) => {
+const registerAccount = async (accountDetails) => {
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(accountDetails.password, salt);
     try {
@@ -17,3 +17,5 @@ module.exports = registerAccount = async (accountDetails) => {
         return false;
     }
 };
+
+module.exports = registerAccount;

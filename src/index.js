@@ -7,7 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
 const { getReport } = require('./models/reports');
-
+const genError = require('./helpers/error');
 const csrfProtection = csurf({
     cookie: true,
 });
