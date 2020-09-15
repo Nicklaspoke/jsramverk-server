@@ -17,18 +17,20 @@ module.exports = validate = (req, res, next) => {
             break;
 
         case '/reports':
-            const { week, titel } = req.body;
-            if (!week || !titel) {
+            const { week, title, content } = req.body;
+
+            if (!week || !title || !content) {
                 res.status(400).json(
                     genError(
                         400,
                         'Missing mandatory parameters',
-                        'mandatory parameter week or titel are missing',
+                        'mandatory parameter week or title are missing',
                     ),
                 );
             } else {
                 next();
             }
+            break;
 
         default:
             next();
