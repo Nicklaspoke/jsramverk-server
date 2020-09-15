@@ -1,373 +1,373 @@
 openapi: 3.0.1
 info:
-  title: jsramverk API
-  description: Backend API for the jsramverk course
-  version: 1.0.0
+    title: jsramverk API
+    description: Backend API for the jsramverk course
+    version: 1.0.0
 tags:
-  - name: authentication
-  - name: content-management
-  - name: content-retrival
+    - name: authentication
+    - name: content-management
+    - name: content-retrival
 
 paths:
-  /auth/register:
-    description: register a new user to the system
-    post:
-      tags:
-        - authentication
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Register"
-      responses:
-        "201":
-          description: user registered
-        "400":
-          description: bad request, email already in use
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-  /auth/login:
-    description: log a user into the system
-    post:
-      tags:
-        - authentication
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Login"
-      responses:
-        "200":
-          description: User loged in successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      accessToken:
-                        type: string
-                        description: A JWT token for the logged in user
-                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkxpdHRsZXBpcCIsImlhdCI6MTUxNjIzOTAyMn0.HNn6hnfU77OAyjbmzACvCa34wqzImZ4MUzTM_HdPpQs
-        "400":
-          description: Failed login atempt
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-  /reports:
-    post:
-      tags:
-        - content-management
-      security:
-        - accessToken: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Report"
-      responses:
-        "201":
-          description: Report created
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    allOf:
-                    - $ref: "#/components/schemas/CreatedReport"
-        "400":
-          description: Not sending in all required data
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "401":
-          description: Unauthorized, invalid token
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden, no token sent
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "409":
-          description: Confliict, when a report with the same week already created exists
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-  /report/week/{id}:
-    description: For handling individual reports
-    get:
-      description: Get the report correspondinig to the requested id
-      tags:
-        - content-retrival
-      parameters: 
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-          description: id/week number of the report
-      responses:
-        "200":
-          description: The requested report
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    allOf:
-                    - $ref: "#/components/schemas/CreatedReport"
-        "404":
-          description: Report not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-    patch:
-      description: Update a report
-      security: 
-        - accessToken: []
-      tags:
-        - content-management
-      parameters: 
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-          description: id/week number of the report
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Report"
-      responses:
-        "200":
-          description: Report updated
-        "401":
-          description: Unauthorized, invalid token
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden, no token sent
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "404":
-          description: Report not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-    delete:
-      description: Delete a created report
-      security: 
-        - accessToken: []
-      tags:
-        - content-management
-      parameters: 
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-          description: id/week number of the report
-      responses:
-        "204":
-          description: Report delted
-        "401":
-          description: Unauthorized, invalid token
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden, no token sent
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-        "404":
-          description: Report not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    allOf:
-                      - $ref: "#/components/schemas/Error"
-      
+    /auth/register:
+        description: register a new user to the system
+        post:
+            tags:
+                - authentication
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Register'
+            responses:
+                '201':
+                    description: user registered
+                '400':
+                    description: bad request, email already in use
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+    /auth/login:
+        description: log a user into the system
+        post:
+            tags:
+                - authentication
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Login'
+            responses:
+                '200':
+                    description: User loged in successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            accessToken:
+                                                type: string
+                                                description: A JWT token for the logged in user
+                                                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkxpdHRsZXBpcCIsImlhdCI6MTUxNjIzOTAyMn0.HNn6hnfU77OAyjbmzACvCa34wqzImZ4MUzTM_HdPpQs
+                '400':
+                    description: Failed login atempt
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+    /reports:
+        post:
+            tags:
+                - content-management
+            security:
+                - accessToken: []
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Report'
+            responses:
+                '201':
+                    description: Report created
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/CreatedReport'
+                '400':
+                    description: Not sending in all required data
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '401':
+                    description: Unauthorized, invalid token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '403':
+                    description: Forbidden, no token sent
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '409':
+                    description: Confliict, when a report with the same week already created exists
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+    /report/week/{id}:
+        description: For handling individual reports
+        get:
+            description: Get the report correspondinig to the requested id
+            tags:
+                - content-retrival
+            parameters:
+                - in: path
+                  name: id
+                  schema:
+                      type: integer
+                  required: true
+                  description: id/week number of the report
+            responses:
+                '200':
+                    description: The requested report
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/CreatedReport'
+                '404':
+                    description: Report not found
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+        patch:
+            description: Update a report
+            security:
+                - accessToken: []
+            tags:
+                - content-management
+            parameters:
+                - in: path
+                  name: id
+                  schema:
+                      type: integer
+                  required: true
+                  description: id/week number of the report
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Report'
+            responses:
+                '200':
+                    description: Report updated
+                '401':
+                    description: Unauthorized, invalid token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '403':
+                    description: Forbidden, no token sent
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '404':
+                    description: Report not found
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+        delete:
+            description: Delete a created report
+            security:
+                - accessToken: []
+            tags:
+                - content-management
+            parameters:
+                - in: path
+                  name: id
+                  schema:
+                      type: integer
+                  required: true
+                  description: id/week number of the report
+            responses:
+                '204':
+                    description: Report delted
+                '401':
+                    description: Unauthorized, invalid token
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '403':
+                    description: Forbidden, no token sent
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+                '404':
+                    description: Report not found
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: object
+                                        allOf:
+                                            - $ref: '#/components/schemas/Error'
+
 components:
-  schemas:
-    Register:
-      description: schema for values a user has to send when registering to the system
-      required: 
-        - email
-        - password
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email address of the user
-          example: test@test.com
-        password:
-          type: string
-          description: the users submited password
-          example: strongPassword123!
-    Login:
-      description: schema for values a user has to send when logging in to the system
-      required: 
-        - email
-        - password
-      type: object
-      properties:
-        email:
-          type: string
-          description: A registerd email address
-          example: lightbringer@wasteland.com
-        password:
-          type: string
-          description: The users password
-          example: BackdoorCode:TosterRepair
-    CreatedReport:
-      description: Responce of a created report
-      type: object
-      allOf:
-        - type: object
-          properties:
-            id:
-              type: string
-              description: internal id given by the server
-              example: '42069'
-        - $ref: "#/components/schemas/Report"
-    Report:
-      description: Schema for creating a new report in the system
-      required: 
-        - week
-        - titel
-        - content
-      type: object
-      properties:
-        week:
-          type: string
-          description: The week for the report, must be between number 1 and 7
-          enum:
-            - "1"
-            - "2"
-            - "3"
-            - "4"
-            - "5"
-            - "6"
-            - "7"
-          example: "2"
-        titel:
-          type: string
-          description: the title of the report
-          example: Report Titel
-        content:
-          type: string
-          description: The main part of the report
-          example: Content goes brrr
-    Error:
-      description: generic error message for the API
-      type: object
-      properties:
-        status:
-          type: string
-          description: http status code for the error
-          example: http status code
-        title:
-          type: string
-          description: Title of the error
-          example: Title of the error
-        details:
-          type: string
-          description: Detailed description of the error
-          example: Detailed description of the error
-  securitySchemes:
-    accessToken:
-      description: Json Web Token
-      type: oauth2
-      flows:
-        password:
-          tokenUrl: /login
-          scopes: {}
+    schemas:
+        Register:
+            description: schema for values a user has to send when registering to the system
+            required:
+                - email
+                - password
+            type: object
+            properties:
+                email:
+                    type: string
+                    description: Email address of the user
+                    example: test@test.com
+                password:
+                    type: string
+                    description: the users submited password
+                    example: strongPassword123!
+        Login:
+            description: schema for values a user has to send when logging in to the system
+            required:
+                - email
+                - password
+            type: object
+            properties:
+                email:
+                    type: string
+                    description: A registerd email address
+                    example: lightbringer@wasteland.com
+                password:
+                    type: string
+                    description: The users password
+                    example: BackdoorCode:TosterRepair
+        CreatedReport:
+            description: Responce of a created report
+            type: object
+            allOf:
+                - type: object
+                  properties:
+                      id:
+                          type: string
+                          description: internal id given by the server
+                          example: '42069'
+                - $ref: '#/components/schemas/Report'
+        Report:
+            description: Schema for creating a new report in the system
+            required:
+                - week
+                - title
+                - content
+            type: object
+            properties:
+                week:
+                    type: string
+                    description: The week for the report, must be between number 1 and 7
+                    enum:
+                        - '1'
+                        - '2'
+                        - '3'
+                        - '4'
+                        - '5'
+                        - '6'
+                        - '7'
+                    example: '2'
+                title:
+                    type: string
+                    description: the title of the report
+                    example: Report title
+                content:
+                    type: string
+                    description: The main part of the report
+                    example: Content goes brrr
+        Error:
+            description: generic error message for the API
+            type: object
+            properties:
+                status:
+                    type: string
+                    description: http status code for the error
+                    example: http status code
+                title:
+                    type: string
+                    description: Title of the error
+                    example: Title of the error
+                details:
+                    type: string
+                    description: Detailed description of the error
+                    example: Detailed description of the error
+    securitySchemes:
+        accessToken:
+            description: Json Web Token
+            type: oauth2
+            flows:
+                password:
+                    tokenUrl: /login
+                    scopes: {}
