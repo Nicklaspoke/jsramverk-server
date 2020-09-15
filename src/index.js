@@ -6,6 +6,7 @@ require('dotenv').config();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
+const { getReport } = require('./models/reports');
 
 const csrfProtection = csurf({
     cookie: true,
@@ -31,8 +32,18 @@ server.use('/api/auth', register);
 server.use('/api/', reports);
 server.use('/api/validate', validate);
 
-server.get('/', auth, (req, res) => {
-    res.json({ BestPony: 'Littlepip' });
+server.get('/api/', auth, async (req, res) => {
+    const presentation = await getReport(0);
+
+    res.status(presentation.length !== 0 ? 200 : 404).json(
+        presentation.length !== 0
+            ? { data: presentation[0] }
+            : genError(
+                  404,
+                  'presentation not found',
+                  'Could not find a presentation with the specified week number',
+              ),
+    );
 });
 
 server.listen(port, console.log(`Listening on port ${port}`));
