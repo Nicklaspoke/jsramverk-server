@@ -3,7 +3,6 @@
  */
 const db = require('../db/db');
 const bcrypt = require('bcryptjs');
-const genError = require('../helpers/error');
 
 module.exports = registerAccount = async (accountDetails) => {
     const salt = await bcrypt.genSalt(12);
