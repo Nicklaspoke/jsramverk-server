@@ -10,7 +10,7 @@ exports.up = function (knex) {
         })
         .createTable('report', function (table) {
             table.integer('week').unique().notNullable();
-            table.string('titel', 50).notNullable().unique();
+            table.string('title', 50).notNullable().unique();
             table.string('content', 2000);
         });
 };
