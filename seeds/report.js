@@ -7,7 +7,7 @@ exports.seed = function (knex) {
             return knex('report').insert([
                 {
                     week: 1,
-                    titel: 'Kmom01',
+                    title: 'Kmom01',
                     content: `
 # jsramverk-me-page
 
