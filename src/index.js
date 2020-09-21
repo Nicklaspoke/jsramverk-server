@@ -15,7 +15,7 @@ const csrfProtection = csurf({
 const server = express();
 server.use(express.json());
 server.use(express.json({ type: 'application/merge-patch+json' }));
-server.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+server.use(cors({ origin: process.env.CORSORIGIN || 'localhost:3000', credentials: true }));
 server.use(cookieParser());
 server.use(csrfProtection);
 //Routers
@@ -46,4 +46,5 @@ server.get('/api/', auth, async (req, res) => {
     );
 });
 
+console.log(`Started server with the following envirimentals set: ${console.log(process.env)}`);
 server.listen(port, console.log(`Listening on port ${port}`));
