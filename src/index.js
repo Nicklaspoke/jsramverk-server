@@ -45,6 +45,6 @@ server.get('/api/', auth, async (req, res) => {
               ),
     );
 });
-
-console.log(`Started server with the following envirimentals set: ${console.log(process.env)}`);
+console.info('Started server with the following envirimentals set:');
+console.info(process.env);
 server.listen(port, console.log(`Listening on port ${port}`));
