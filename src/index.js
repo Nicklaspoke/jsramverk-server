@@ -4,6 +4,7 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
 const { getReport } = require('./models/reports');
@@ -18,6 +19,7 @@ server.use(express.json({ type: 'application/merge-patch+json' }));
 server.use(cors({ origin: process.env.CORSORIGIN || 'localhost:3000', credentials: true }));
 server.use(cookieParser());
 server.use(csrfProtection);
+server.use(morgan(':method :remote-addr - :url :status :res[content-length] - :response-time ms'));
 //Routers
 const auth = require('./routers/auth');
 const register = require('./routers/register');
