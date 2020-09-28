@@ -22,7 +22,7 @@ const validate = (req, res, next) => {
                     genError(
                         400,
                         'Missing mandatory parameters',
-                        'mandatory parameter week or title are missing',
+                        'Mandatory parameter week or title are missing',
                     ),
                 );
             } else {
