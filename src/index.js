@@ -19,7 +19,9 @@ server.use(express.json({ type: 'application/merge-patch+json' }));
 server.use(cors({ origin: process.env.CORSORIGIN || 'localhost:3000', credentials: true }));
 server.use(cookieParser());
 server.use(csrfProtection);
-server.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+if (process.env.NODE_ENV !== 'test') {
+    server.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+}
 //Routers
 const auth = require('./routers/auth');
 const register = require('./routers/register');
@@ -49,8 +51,8 @@ server.get('/api/', auth, async (req, res) => {
 });
 
 const serverApp = server.listen(port, () => {
-    console.info('Started server with the following envirimentals set:');
-    console.info(process.env);
+    // console.info('Started server with the following envirimentals set:');
+    // console.info(process.env);
     console.info(`Listening on port ${port}`);
 });
 
