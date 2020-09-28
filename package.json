@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node src/index.js",
         "start-dev": "nodemon src/index.js",
-        "test": "nyc mocha 'test/**/*.js'",
+        "test": "nyc mocha 'test/**/*.js' --exit",
         "db:migrate": "knex migrate:latest",
         "db:seed": "knex seed:run"
     },
