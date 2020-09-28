@@ -1,5 +1,6 @@
 /node_modules
 
+/coverage
 src/config/config.json
 .env
 db.sqlite
