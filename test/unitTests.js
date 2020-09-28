@@ -112,7 +112,7 @@ describe('Testing various non router functions', function () {
             this.error.error.title.should.be.a('string');
         });
 
-        it('should have the value title with the value 724', function () {
+        it('should have the value title with the value This line should be unreachable', function () {
             this.error.error.title.should.be.equal('This line should be unreachable');
         });
 
@@ -120,7 +120,7 @@ describe('Testing various non router functions', function () {
             this.error.error.description.should.be.a('string');
         });
 
-        it('should have the value description with the value 724', function () {
+        it('should have the value description with the value How did you end up here?', function () {
             this.error.error.description.should.be.equal('How did you end up here?');
         });
     });
