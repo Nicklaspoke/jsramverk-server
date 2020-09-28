@@ -1,7 +1,7 @@
 const chai = require('chai');
 const path = require('path');
-const dbConfig = require(path.join(__dirname, '../../src/db/config'));
-const errorGen = require(path.join(__dirname, '../../src/helpers/error'));
+const dbConfig = require(path.join(__dirname, '../src/db/config'));
+const errorGen = require(path.join(__dirname, '../src/helpers/error'));
 chai.should();
 
 // Setup env variables for the tests
@@ -20,7 +20,7 @@ describe('Testing various non router functions', function () {
 
             it('should have the correct path to the database file', function () {
                 this.config.connection.filename.should.be.equal(
-                    path.join(__dirname, '../../src/db/test.sqlite'),
+                    path.join(__dirname, '../src/db/test.sqlite'),
                 );
             });
         });
@@ -74,7 +74,7 @@ describe('Testing various non router functions', function () {
 
             it('should have the correct path to the database file', function () {
                 this.config.connection.filename.should.be.equal(
-                    path.join(__dirname, '../../src/db/db.sqlite'),
+                    path.join(__dirname, '../src/db/db.sqlite'),
                 );
             });
         });
