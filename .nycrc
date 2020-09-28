@@ -1,0 +1,14 @@
+{
+    "all": true,
+    "check-coverage": true,
+    "include": [
+        "src/**/*.js"
+    ],
+    "exclude": [
+        "src/db/db.js"
+    ],
+    "reporter": [
+        "text",
+        "html"
+    ]
+}
