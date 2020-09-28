@@ -8,7 +8,10 @@ const getClient = () => {
         sqlite3: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(__dirname, 'db.sqlite'),
+                filename: path.join(
+                    __dirname,
+                    process.env.SQLITE_FILE ? process.env.SQLITE_FILE : 'db.sqlite',
+                ),
             },
         },
         mysql: {
