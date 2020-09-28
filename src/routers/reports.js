@@ -26,7 +26,7 @@ router.put('/reports/week/:weekNum', auth, validate, async (req, res) => {
     const sucess = await updateReport(req.body);
     res.status(sucess ? 201 : 500).json(
         sucess
-            ? { data: 'report updated' }
+            ? { data: 'Report updated' }
             : genError(500, 'Internal server error', 'something went wrong when trying to update'),
     );
 });
