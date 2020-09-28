@@ -30,8 +30,8 @@ describe('Testing the /auth route of the API', function () {
                 done();
             });
     });
-    describe('Testing /auth/login', function () {
-        describe('Testing status code 200 for /auth/login', function () {
+    describe('Testing POST /auth/login', function () {
+        describe('Testing status code 200 for POST /auth/login', function () {
             before(function (done) {
                 chai.request(server)
                     .post('/api/auth/login')
@@ -62,7 +62,7 @@ describe('Testing the /auth route of the API', function () {
                 this.res.body.token.should.be.a('string');
             });
         });
-        describe('Testing status code 400 for /auth/login', function () {
+        describe('Testing status code 400 for POST /auth/login', function () {
             before(function (done) {
                 chai.request(server)
                     .post('/api/auth/login')
@@ -73,7 +73,6 @@ describe('Testing the /auth route of the API', function () {
                     .end((err, res) => {
                         this.err = err;
                         this.res = res;
-                        // console.log(this.res);
                         done();
                     });
             });
@@ -114,8 +113,8 @@ describe('Testing the /auth route of the API', function () {
         });
     });
 
-    describe('Testing /auth/authCheck', function () {
-        describe('Testing status code 200 for /auth/authCheck', function () {
+    describe('Testing GET /auth/authCheck', function () {
+        describe('Testing status code 200 for GET /auth/authCheck', function () {
             before(function (done) {
                 chai.request(server)
                     .get('/api/auth/authCheck')
@@ -136,7 +135,7 @@ describe('Testing the /auth route of the API', function () {
                 this.res.body.data.should.be.equal('Access Granted');
             });
         });
-        describe('Testing status code 401 for /auth/authCheck', function () {
+        describe('Testing status code 401 for GET /auth/authCheck', function () {
             before(function (done) {
                 chai.request(server)
                     .get('/api/auth/authCheck')
@@ -181,7 +180,7 @@ describe('Testing the /auth route of the API', function () {
                 this.res.body.error.description.should.be.equal('Token invalid or has expired');
             });
         });
-        describe('Testing status code 403 for /auth/authCheck', function () {
+        describe('Testing status code 403 for GET /auth/authCheck', function () {
             before(function (done) {
                 chai.request(server)
                     .get('/api/auth/authCheck')
@@ -230,7 +229,7 @@ describe('Testing the /auth route of the API', function () {
         });
     });
 
-    describe('Testing /auth/logout', function () {
+    describe('Testing GET /auth/logout', function () {
         it('should have a status code of 204', function (done) {
             chai.request(server)
                 .get('/api/auth/logout')
@@ -243,7 +242,7 @@ describe('Testing the /auth route of the API', function () {
         });
     });
 
-    describe('Testing /auth/get-csrf-token', function () {
+    describe('Testing GET /auth/get-csrf-token', function () {
         before(function (done) {
             chai.request(server)
                 .get('/api/auth/get-csrf-token')
