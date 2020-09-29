@@ -8,7 +8,8 @@
         "start-dev": "nodemon src/index.js",
         "test": "nyc mocha 'test/**/*.js' --exit",
         "db:migrate": "knex migrate:latest",
-        "db:seed": "knex seed:run"
+        "db:seed": "knex seed:run",
+        "lint": "eslint ."
     },
     "repository": {
         "type": "git",
