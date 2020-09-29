@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
             genError(400, 'Invalid credentials', 'Login failed; Invalid email or password.'),
         );
     } else {
-        const token = jwt.sign({}, process.env.JWTSECRET || 'devmode', {
+        const token = jwt.sign({}, process.env.JWTSECRET, {
             issuer: 'Nicklaspoke',
             subject: req.body.email,
             expiresIn: '1h',
