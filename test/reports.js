@@ -354,7 +354,7 @@ describe('Testing the /reports route of the API', function () {
                         .send({ week: 420, title: 'Blackjack', content: 'Derpy Hooves;Ditzy Doo' })
                         .set('Cookie', `${this.csrfCookie};${validJWT}`)
                         .set('X-CSRF-Token', this.csrfToken)
-                        .end((err, res) => {
+                        .end(() => {
                             resolve();
                         });
                 });
