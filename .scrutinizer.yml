@@ -16,6 +16,6 @@ build:
                     - command: npm run db:migrate
                     - command: npm run db:seed
                     - command: npm test
-                coverage:
-                    file: coverage/clover.xml
-                    format: clover
+                      coverage:
+                          file: coverage/clover.xml
+                          format: clover
