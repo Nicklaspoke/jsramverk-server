@@ -17,7 +17,7 @@ const csrfProtection = csurf({
 const server = express();
 server.use(express.json());
 server.use(express.json({ type: 'application/merge-patch+json' }));
-server.use(cors({ origin: process.env.CORSORIGIN || 'localhost:3000', credentials: true }));
+server.use(cors());
 server.use(cookieParser());
 server.use(csrfProtection);
 if (process.env.NODE_ENV !== 'test') {
