@@ -2,6 +2,7 @@ const chai = require('chai');
 const path = require('path');
 const dbConfig = require(path.join(__dirname, '../src/db/config'));
 const errorGen = require(path.join(__dirname, '../src/helpers/error'));
+const preFligthCheck = require(path.join(__dirname, '../src/helpers/preFlight'));
 chai.should();
 
 // Setup env variables for the tests
@@ -60,24 +61,6 @@ describe('Testing various non router functions', function () {
                 this.config.connection.database.should.be.equal('jsramverk');
             });
         });
-
-        describe('Testing config function for the database when no env is given', function () {
-            before(function () {
-                delete process.env.DB_TYPE;
-                delete process.env.SQLITE_FILE;
-                this.config = dbConfig();
-            });
-
-            it('should have the dbType sqlite3', function () {
-                this.config.client.should.be.equal('sqlite3');
-            });
-
-            it('should have the correct path to the database file', function () {
-                this.config.connection.filename.should.be.equal(
-                    path.join(__dirname, '../src/db/db.sqlite'),
-                );
-            });
-        });
     });
 
     describe('Test the function for generating http error messages', function () {
@@ -122,6 +105,25 @@ describe('Testing various non router functions', function () {
 
         it('should have the value description with the value How did you end up here?', function () {
             this.error.error.description.should.be.equal('How did you end up here?');
+        });
+    });
+
+    describe('Testing the preFlight function', function () {
+        before(function () {
+            delete process.env.JWTSECRET;
+            delete process.env.PORT;
+            delete process.env.SQLITE_FILE;
+            preFligthCheck();
+        });
+
+        it('ENV PORT should have defaulted to 8080', function () {
+            process.env.PORT.should.be.equal('8080');
+        });
+        it('ENV JWTSECRET should have defaulted to devMode', function () {
+            process.env.JWTSECRET.should.be.equal('devMode');
+        });
+        it('ENV SQLITE_FILE should have defaulted to db.sqlite', function () {
+            process.env.SQLITE_FILE.should.be.equal('db.sqlite');
         });
     });
 });
