@@ -1,5 +1,9 @@
 checks:
     javascript: true
+
+filter:
+    paths:
+        - src/**
 build:
     environment:
         variables:
