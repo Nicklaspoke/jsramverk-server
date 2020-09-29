@@ -8,6 +8,7 @@
  */
 const preFlightValues = [
     { envName: 'NODE_ENV', default: 'development' },
+    { envName: 'PORT', default: '8080' },
     { envName: 'JWTSECRET', default: 'devMode' },
     { envName: 'DB_TYPE', default: 'sqlite3' },
     { envName: 'SQLITE_FILE', default: 'db.sqlite' },
