@@ -6,7 +6,7 @@ module.exports = () => {
         sqlite3: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(__dirname, './src/db', process.env.SQLITE_FILE),
+                filename: path.join(__dirname, './src/db', process.env.SQLITE_FILE || 'db.sqlite'),
             },
             useNullAsDefault: true,
         },
