@@ -1,0 +1,8 @@
+build:
+    environment:
+        node: v14.9.0
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - js-scrutinizer-run
