@@ -1,5 +1,7 @@
 # jsramverk-server
 
+[![Build Status](https://travis-ci.org/Nicklaspoke/jsramverk-server.svg?branch=master)](https://travis-ci.org/Nicklaspoke/jsramverk-server)
+
 This is a REST-API server that are build to work together with my [client](https://github.com/Nicklaspoke/jsramverk-client)
 
 # Installation and running
