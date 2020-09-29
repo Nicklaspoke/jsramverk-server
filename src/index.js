@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
 const { getReport } = require('./models/reports');
 const genError = require('./helpers/error');
+const preFlightCheck = require('./helpers/preFlight');
 const csrfProtection = csurf({
     cookie: true,
 });
@@ -51,8 +52,7 @@ server.get('/api/', auth, async (req, res) => {
 });
 
 const serverApp = server.listen(port, () => {
-    // console.info('Started server with the following envirimentals set:');
-    // console.info(process.env);
+    preFlightCheck();
     console.info(`Listening on port ${port}`);
 });
 
