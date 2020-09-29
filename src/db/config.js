@@ -8,10 +8,7 @@ const getClient = () => {
         sqlite3: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(
-                    __dirname,
-                    process.env.SQLITE_FILE ? process.env.SQLITE_FILE : 'db.sqlite',
-                ),
+                filename: path.join(__dirname, process.env.SQLITE_FILE),
             },
         },
         mysql: {
@@ -26,7 +23,7 @@ const getClient = () => {
         },
     };
 
-    return process.env.DB_TYPE ? config[process.env.DB_TYPE] : config['sqlite3'];
+    return config[process.env.DB_TYPE];
 };
 
 module.exports = getClient;

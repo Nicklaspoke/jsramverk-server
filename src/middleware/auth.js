@@ -15,7 +15,7 @@ const auth = (req, res, next) => {
             genError(403, 'No token provided', 'No access token provided in cookie'),
         );
     } else {
-        jwt.verify(req.cookies.token, process.env.JWTSECRET || 'devmode', (err) => {
+        jwt.verify(req.cookies.token, process.env.JWTSECRET, (err) => {
             if (err) {
                 res.status(401).json(
                     genError(401, 'Invalid token', 'Token invalid or has expired'),
