@@ -1,8 +1,17 @@
 build:
     environment:
-        node: v14.9.0
+        variables:
+            DB_TYPE: 'sqlite3'
+            SQLITE_FILE: 'test.db'
+            JWTSECRET: 'devMode'
+            NODE_ENV: 'test'
     nodes:
         analysis:
             tests:
                 override:
                     - js-scrutinizer-run
+        tests:
+            override:
+                - command: npm run db:migrate
+                - command: npm run db:seed
+                - command: npm test
