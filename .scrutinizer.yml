@@ -10,8 +10,12 @@ build:
             tests:
                 override:
                     - js-scrutinizer-run
-        tests:
-            override:
-                - command: npm run db:migrate
-                - command: npm run db:seed
-                - command: npm test
+        coverage:
+            tests:
+                override:
+                    - command: npm run db:migrate
+                    - command: npm run db:seed
+                    - command: npm test
+                coverage:
+                    file: coverage/clover.xml
+                    format: clover
