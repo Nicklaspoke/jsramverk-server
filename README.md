@@ -1,6 +1,8 @@
 # jsramverk-server
 
 [![Build Status](https://travis-ci.org/Nicklaspoke/jsramverk-server.svg?branch=master)](https://travis-ci.org/Nicklaspoke/jsramverk-server)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nicklaspoke/jsramverk-server/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nicklaspoke/jsramverk-server/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Nicklaspoke/jsramverk-server/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nicklaspoke/jsramverk-server/?branch=master)
 
 This is a REST-API server that are build to work together with my [client](https://github.com/Nicklaspoke/jsramverk-client)
 
@@ -25,7 +27,7 @@ To start the server you can either use `npm start` or `npm run start-dev`, dev w
 
 You can utilize the default admin account to develop and the the API.
 
--   `emial: admin@admin.se`
+-   `email: admin@admin.se`
 -   `password: admin`
 
 ## Use docker
