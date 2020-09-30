@@ -6,20 +6,20 @@ require('dotenv').config();
 const cors = require('cors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const csurf = require('csurf');
+// const csurf = require('csurf');
 const { getReport } = require('./models/reports');
 const genError = require('./helpers/error');
 const preFlightCheck = require('./helpers/preFlight');
-const csrfProtection = csurf({
-    cookie: true,
-});
+// const csrfProtection = csurf({
+//     cookie: true,
+// });
 
 const server = express();
 server.use(express.json());
 server.use(express.json({ type: 'application/merge-patch+json' }));
 server.use(cors());
 server.use(cookieParser());
-server.use(csrfProtection);
+// server.use(csrfProtection);
 if (process.env.NODE_ENV !== 'test') {
     server.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 }
