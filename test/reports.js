@@ -25,7 +25,8 @@ describe('Testing the /reports route of the API', function () {
         chai.request(server)
             .get('/api/auth/get-csrf-token')
             .end((err, res) => {
-                this.csrfCookie = res.headers['set-cookie'][0];
+                this.csrfCookie = res.headers['set-cookie'] || ['derp'];
+                this.csrfCookie = this.csrfCookie[0];
                 this.csrfToken = res.body.csrfToken;
                 done();
             });

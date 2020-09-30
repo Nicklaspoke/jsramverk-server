@@ -25,7 +25,8 @@ describe('Testing the /auth route of the API', function () {
         chai.request(server)
             .get('/api/auth/get-csrf-token')
             .end((err, res) => {
-                this.csrfCookie = res.headers['set-cookie'][0];
+                this.csrfCookie = res.headers['set-cookie'] || ['derp'];
+                this.csrfCookie = this.csrfCookie[0];
                 this.csrfToken = res.body.csrfToken;
                 done();
             });
@@ -239,33 +240,6 @@ describe('Testing the /auth route of the API', function () {
                     res.should.have.status(204);
                     done();
                 });
-        });
-    });
-
-    describe('Testing GET /auth/get-csrf-token', function () {
-        before(function (done) {
-            chai.request(server)
-                .get('/api/auth/get-csrf-token')
-                .end((err, res) => {
-                    this.err = err;
-                    this.res = res;
-                    done();
-                });
-        });
-        it('should have a status code of 200', function () {
-            this.res.should.have.status(200);
-        });
-
-        it('should have a cookie provided in the header', function () {
-            this.res.headers['set-cookie'][0].should.be.a('string');
-        });
-
-        it("should have a key in it's body named csrfToken", function () {
-            this.res.body.should.have.all.key('csrfToken');
-        });
-
-        it('should have a csrfToken that is a string', function () {
-            this.res.body.csrfToken.should.be.a('string');
         });
     });
 });
