@@ -40,5 +40,6 @@ router.get('/authCheck', auth, (req, res) => {
 });
 
 router.get('/get-csrf-token', (req, res) => {
-    res.status(200).json({ csrfToken: req.csrfToken() });
+    res.status(200).json({ csrfToken: 'derp' });
+    // res.status(200).json({ csrfToken: req.csrfToken() });
 });
