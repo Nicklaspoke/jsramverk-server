@@ -12,7 +12,7 @@ const genError = require('./helpers/error');
 const preFlightCheck = require('./helpers/preFlight');
 const csrfProtection = csurf({
     cookie: true,
-    domain: '*.nicklaspoke.se',
+    domain: '*',
 });
 
 const server = express();
